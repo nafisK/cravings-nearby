@@ -18,7 +18,8 @@ import makeStyles from './styles'
 export default function PlaceDetails({ place, selected, refProp }) {
   const classes = makeStyles()
 
-  if (selected) refProp?.current?.scrollIntoView({behavior: 'smooth', block: 'start'})
+  if (selected)
+    refProp?.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
 
   return (
     <Card elevation={6}>
@@ -33,7 +34,9 @@ export default function PlaceDetails({ place, selected, refProp }) {
       />
       <CardContent>
         <Typography variant='h5' component='h2'>
-          {place.name}
+          <Box sx={{ fontWeight: 'bold' }} style={{ color: '#4C4E52' }}>
+            {place.name}
+          </Box>
         </Typography>
         <Box display='flex' justifyContent='space-between'>
           <Rating value={Number(place.rating)} readOnly />
@@ -42,30 +45,26 @@ export default function PlaceDetails({ place, selected, refProp }) {
           </Typography>
         </Box>
         <Box display='flex' justifyContent='space-between'>
-          <Typography variant='subtitle1'>Price</Typography>
+          <Typography variant='subtitle1'>
+            <Box sx={{ fontWeight: 'bold' }} style={{ color: '#4C4E52' }}>
+              Price
+            </Box>
+          </Typography>
           <Typography gutterBottom variant='subtitle1'>
             {place.price_level}
           </Typography>
         </Box>
         <Box display='flex' justifyContent='space-between'>
-          <Typography variant='subtitle1'>Ranking</Typography>
+          <Typography variant='subtitle1'>
+            <Box sx={{ fontWeight: 'bold' }} style={{ color: '#4C4E52' }}>
+              Ranking
+            </Box>
+          </Typography>
           <Typography gutterBottom variant='subtitle1'>
             {place.ranking}
           </Typography>
         </Box>
-        {place?.awards?.map((award, i) => (
-          <Box
-            my={1}
-            display='flex'
-            justifyContent='space-between'
-            alignItems='center'
-          >
-            <img src={award.images.small} alt='/' />
-            <Typography variant='subtitle2' color='textSecondary'>
-              {award.display_name}
-            </Typography>
-          </Box>
-        ))}
+
         {place?.cuisine?.map(({ name }) => (
           <Chip key={name} size='small' label={name} className={classes.Chip} />
         ))}
@@ -74,9 +73,20 @@ export default function PlaceDetails({ place, selected, refProp }) {
             gutterBottom
             variant='subtitle2'
             color='textSecondary'
+            style={{ cursor: 'pointer' }}
             className={classes.subtitle}
+            onClick={() => {
+              window.open(
+                `https://www.google.com/maps/search/?api=1&query=${place.address}`
+              )
+            }}
           >
-            <LocationOn /> {place.address}
+            <Box sx={{ fontWeight: 'bold' }} style={{ color: '#4C4E52' }}>
+              <LocationOn />
+            </Box>
+            <Box sx={{ fontWeight: 'bold' }} style={{ color: '#4C4E52' }}>
+              {place.address}
+            </Box>
           </Typography>
         )}
         {place?.phone && (
@@ -84,9 +94,18 @@ export default function PlaceDetails({ place, selected, refProp }) {
             gutterBottom
             variant='subtitle2'
             color='textSecondary'
+            style={{ cursor: 'pointer' }}
             className={classes.spacing}
+            onClick={() => {
+              window.location.href = `tel:${place.phone}`
+            }}
           >
-            <PhoneIcon /> {place.phone}
+            <Box sx={{ fontWeight: 'bold' }} style={{ color: '#4C4E52' }}>
+              <PhoneIcon />
+            </Box>
+            <Box sx={{ fontWeight: 'bold' }} style={{ color: '#4C4E52' }}>
+              {place.phone}
+            </Box>
           </Typography>
         )}
         <CardActions>

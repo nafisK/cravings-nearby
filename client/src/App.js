@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 
-import { CssBaseline, Grid } from '@material-ui/core'
+import { colors, CssBaseline, Grid } from '@material-ui/core'
 
 import Header from './Components/Header/Header'
 import List from './Components/List/List'
@@ -11,7 +11,7 @@ import { getPlacesData } from './api/index'
 function App() {
   const [places, setPlaces] = useState([])
   const [coordinates, setCoordinates] = useState({})
-  const [childClicked, setChildClicked] = useState(null);
+  const [childClicked, setChildClicked] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
 
   // was set to null in video
@@ -38,13 +38,24 @@ function App() {
 
   return (
     <>
-      <CssBaseline></CssBaseline>
-      <Header />
+      <CssBaseline />
+      <Header setCoordinates={setCoordinates} />
 
-      <Grid container spacing={3} style={{ width: '100%' }}>
+      <Grid
+        container
+        spacing={3}
+        style={{ width: '100%', backgroundColor: 'rgb(244 244 245)' }}
+      >
+        {/* Items Scroll */}
         <Grid item xs={12} md={4}>
-          <List places={places} childClicked={childClicked} isLoading={isLoading}/>
+          <List
+            places={places}
+            childClicked={childClicked}
+            isLoading={isLoading}
+          />
         </Grid>
+
+        {/* Map */}
         <Grid
           item
           xs={12}

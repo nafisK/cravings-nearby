@@ -7,6 +7,7 @@ import {
   MenuItem,
   FormControl,
   Select,
+  Box,
 } from '@material-ui/core'
 import PlaceDetails from '../PlaceDetails/PlaceDetails'
 
@@ -28,25 +29,17 @@ export default function List({ places, childClicked, isLoading }) {
 
   return (
     <div className={classes.container}>
-      <Typography variant='h4'>Food & Dining around you</Typography>
+      <Typography variant='h4'>
+        <Box sx={{ fontWeight: 'bold' }} style={{ color: '#4C4E52' }}>
+          Food Near You
+        </Box>
+      </Typography>
       {isLoading ? (
         <div className={classes.loading}>
           <CircularProgress size='5rem' />
         </div>
       ) : (
         <>
-          <FormControl className={classes.formControl}>
-            <InputLabel id='type'>Type</InputLabel>
-            <Select
-              id='type'
-              value={type}
-              onChange={e => setType(e.target.value)}
-            >
-              <MenuItem value='restaurants'>Restaurants</MenuItem>
-              <MenuItem value='hotels'>Hotels</MenuItem>
-              <MenuItem value='attractions'>Attractions</MenuItem>
-            </Select>
-          </FormControl>
           <FormControl className={classes.formControl}>
             <InputLabel id='rating'>Rating</InputLabel>
             <Select
