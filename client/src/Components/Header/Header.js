@@ -17,7 +17,7 @@ export default function Header() {
             <Typography variant='h6' className={classes.title}>
               Exploring new places
             </Typography>
-            {/* <Autocomplete>
+            {/* <Autocomplete onLoad={} onPlaceChanged={}>
               <div className={classes.search}>
                 <div className={classes.searchIcon}>
                   <Search />
