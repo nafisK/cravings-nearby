@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 
 import { colors, CssBaseline, Grid } from '@material-ui/core'
+import toast, { Toaster } from 'react-hot-toast'
 
 import Header from './Components/Header/Header'
 import List from './Components/List/List'
@@ -13,6 +14,7 @@ function App() {
   const [coordinates, setCoordinates] = useState({})
   const [childClicked, setChildClicked] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
+  const [loadToast, setloadToast] = useState(false)
 
   // was set to null in video
   const [bounds, setBounds] = useState({})
@@ -36,11 +38,20 @@ function App() {
       .catch(err => console.log(err))
   }, [coordinates, bounds])
 
+  useEffect(() => {
+    setloadToast(true)
+  }, [])
+
+  const notify = () => toast('Restaurants found in your location!')
+
   return (
     <>
+      <div>
+        {loadToast && notify() && setloadToast(false)}
+        <Toaster />
+      </div>
       <CssBaseline />
       <Header setCoordinates={setCoordinates} />
-
       <Grid
         container
         spacing={3}
